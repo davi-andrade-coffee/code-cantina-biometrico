@@ -1,0 +1,12 @@
+server:
+  port: ${PORT:8080}
+
+biometric:
+  threshold: ${BIOMETRIC_THRESHOLD:40.0}
+  max-candidates: ${MAX_CANDIDATES:2000}
+  request-max-bytes: ${REQUEST_MAX_BYTES:1048576}
+
+spring:
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
