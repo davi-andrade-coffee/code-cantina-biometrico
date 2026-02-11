@@ -10,3 +10,12 @@ spring:
   jackson:
     deserialization:
       fail-on-unknown-properties: true
+
+logging:
+  level:
+    root: INFO
+    com.cantina.biometric: DEBUG
+    org.springframework.web: INFO
+    org.springframework.web.servlet.DispatcherServlet: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] [%X{requestId}] %logger - %msg%n"

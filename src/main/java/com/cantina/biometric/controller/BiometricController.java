@@ -32,6 +32,10 @@ public class BiometricController {
 
     @PostMapping("/identify")
     public IdentifyResponse identify(@Valid @RequestBody IdentifyRequest request) {
+        log.info("event=identify-request-received requestId={} candidatesCount={}",
+                MDC.get(RequestIdFilter.REQUEST_ID_MDC_KEY),
+                request.candidates().size());
+
         long start = System.nanoTime();
         var result = matchingService.identify(request.scanTemplateBase64(), request.candidates());
         long elapsedMs = (System.nanoTime() - start) / 1_000_000;
@@ -56,6 +60,10 @@ public class BiometricController {
 
     @PostMapping("/verify")
     public VerifyResponse verify(@Valid @RequestBody VerifyRequest request) {
+        log.info("event=verify-request-received requestId={} templatesCount={}",
+                MDC.get(RequestIdFilter.REQUEST_ID_MDC_KEY),
+                request.personTemplatesBase64().size());
+
         long start = System.nanoTime();
         var result = matchingService.verify(request.scanTemplateBase64(), request.personTemplatesBase64());
         long elapsedMs = (System.nanoTime() - start) / 1_000_000;
